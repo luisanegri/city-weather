@@ -1,6 +1,6 @@
 import { Text, View } from "react-native"
 
-const HomeScreen = () => {
+const WeatherDetailsScreen = () => {
     return (
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
             <Text>Weather Details Screen</Text>
@@ -8,4 +8,5 @@ const HomeScreen = () => {
     )
 }
 
-export default HomeScreen
+export default WeatherDetailsScreen
+
