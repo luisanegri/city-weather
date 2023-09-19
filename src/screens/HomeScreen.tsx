@@ -1,4 +1,5 @@
 import { View, Button, Text } from "react-native";
+import { Routes } from "../navigation/routes";
 
 const HomeScreen = ({ navigation }) => {
     return (
@@ -6,7 +7,7 @@ const HomeScreen = ({ navigation }) => {
             <Text>Home Screen</Text>
             <Button
                 title="Go to Weather Details"
-                onPress={() => navigation.navigate('WeatherDetails')}
+                onPress={() => navigation.navigate(Routes.WeatherDetails)}
             />
         </View>
     );
