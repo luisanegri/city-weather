@@ -1,11 +1,7 @@
 import { createStackNavigator } from '@react-navigation/stack';
 import HomeScreen from '../screens/HomeScreen';
 import WeatherDetailsScreen from '../screens/WeatherDetailsScreen'
-
-export enum Routes {
-  Home = 'Home',
-  WeatherDetails = 'WeatherDetails',
-}
+import { Routes } from './routes';
 
 const Stack = createStackNavigator();
 
