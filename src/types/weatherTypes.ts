@@ -9,3 +9,18 @@ export type WeatherData = {
     temp: number;
     tempType: string;
 };
+
+export type Weather = {
+    date: string;
+    temp: number;
+    tempType: string;
+};
+
+type CityWeatherData = {
+    city: CityData;
+    weather: Weather[];
+};
+
+export type MergedWeatherData = {
+    [key: string]: CityWeatherData;
+};
