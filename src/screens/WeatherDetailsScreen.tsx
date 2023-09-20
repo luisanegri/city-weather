@@ -1,9 +1,16 @@
+import { useLayoutEffect } from 'react';
 import CityWeatherList from '../components/CityWeatherList';
 import CityImageWithLabel from '../components/CityImageWithLabel';
 import { CityWeatherData } from "../types/weatherTypes"
 
-const WeatherDetailsScreen = ({ route }) => {
+const WeatherDetailsScreen = ({ route, navigation }) => {
     const weatherDataForCity: CityWeatherData = route.params.weatherDataForCity
+
+    useLayoutEffect(() => {
+        navigation.setOptions({
+            title: weatherDataForCity.city.name,
+        });
+    }, [navigation, weatherDataForCity.city.name]);
 
     const convertToCelsius = (temp: number, tempType: string) => {
         switch (tempType) {
