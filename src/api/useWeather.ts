@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
+import { WeatherData } from '../types/weatherTypes';
 
 const API_URL = "https://us-central1-mobile-assignment-server.cloudfunctions.net/weather";
 
 const useWeather = () => {
-  const [weatherData, setWeatherData] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [weatherData, setWeatherData] = useState<WeatherData | undefined>();
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<AxiosError | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -17,7 +18,7 @@ const useWeather = () => {
         setWeatherData(response.data)
 
       } catch (error) {
-        setError(error);
+        setError(error as AxiosError);
       } finally {
         setLoading(false);
       }
