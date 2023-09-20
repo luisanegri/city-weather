@@ -16,7 +16,7 @@ export type Weather = {
     tempType: string;
 };
 
-type CityWeatherData = {
+export type CityWeatherData = {
     city: CityData;
     weather: Weather[];
 };

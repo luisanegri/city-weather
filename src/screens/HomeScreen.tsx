@@ -1,12 +1,16 @@
 import { FlatList, Text, View, StyleSheet } from 'react-native';
 import { useCallback } from 'react';
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
 
 import { Routes } from '../navigation/routes';
 import useWeather from '../api/useWeather';
 import CityItem from '../components/CityItem';
+import { AppNavigatorParamList } from '../navigation/AppNavigator';
 
-const HomeScreen = ({ navigation }) => {
+const HomeScreen = () => {
     const { loading, error, weatherData, getWeatherDetailsForCity } = useWeather();
+    const navigation = useNavigation<StackNavigationProp<AppNavigatorParamList, Routes.WeatherDetails>>();
 
     const cityNames = weatherData ? Object.keys(weatherData).sort() : [];
 
