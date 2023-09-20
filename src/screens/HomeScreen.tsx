@@ -1,9 +1,9 @@
-import { FlatList, Text, View, StyleSheet, Button } from 'react-native';
+import { FlatList, Text, View, StyleSheet } from 'react-native';
 import { useCallback } from 'react';
 
 import { Routes } from '../navigation/routes';
 import useWeather from '../api/useWeather';
-
+import CityItem from '../components/CityItem';
 
 const HomeScreen = ({ navigation }) => {
     const { loading, error, weatherData, getWeatherDetailsForCity } = useWeather();
@@ -33,10 +33,7 @@ const HomeScreen = ({ navigation }) => {
                 data={cityNames}
                 keyExtractor={(city) => city}
                 renderItem={({ item: cityName }) => (
-                    <Button
-                        title={cityName}
-                        onPress={() => navigation.navigate(Routes.WeatherDetails)}
-                    />
+                    <CityItem cityName={cityName} onPress={handleCityPress} />
                 )}
             />
         </View>
