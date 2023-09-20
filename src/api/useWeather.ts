@@ -50,10 +50,15 @@ const useWeather = () => {
     fetchData();
   }, []);
 
+  const getWeatherDetailsForCity = (cityName: string) => {
+    return weatherData[cityName];
+  };
+
   return {
     loading,
     error,
     weatherData,
+    getWeatherDetailsForCity,
   };
 };
 

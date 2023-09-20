@@ -1,10 +1,22 @@
 import { FlatList, Text, View, StyleSheet, Button } from 'react-native';
+import { useCallback } from 'react';
+
 import { Routes } from '../navigation/routes';
 import useWeather from '../api/useWeather';
 
 
 const HomeScreen = ({ navigation }) => {
-    const { loading, error, weatherData } = useWeather();
+    const { loading, error, weatherData, getWeatherDetailsForCity } = useWeather();
+
+    const cityNames = weatherData ? Object.keys(weatherData).sort() : [];
+
+    const handleCityPress = useCallback((cityName: string) => {
+        const data = getWeatherDetailsForCity(cityName);
+
+        navigation.navigate(Routes.WeatherDetails, {
+            weatherDataForCity: data
+        });
+    }, [navigation, getWeatherDetailsForCity]);
 
     if (loading) {
         return <Text style={styles.infoText}>Loading...</Text>;
@@ -14,7 +26,6 @@ const HomeScreen = ({ navigation }) => {
         return <Text style={styles.errorText}>Error fetching weather data. Please try again.</Text>;
     }
 
-    const cityNames = weatherData ? Object.keys(weatherData).sort() : [];
 
     return (
         <View style={styles.container}>
