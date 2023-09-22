@@ -19,7 +19,7 @@ const AppNavigator: React.FC = () => {
       initialRouteName={Routes.Home}
     >
       <Stack.Screen name={Routes.Home} component={HomeScreen} options={{ title: 'Weather by City' }} />
-      <Stack.Screen name={Routes.WeatherDetails} component={WeatherDetailsScreen} options={{ title: 'Weather Details' }} />
+      <Stack.Screen name={Routes.WeatherDetails} component={WeatherDetailsScreen} />
     </Stack.Navigator>
   );
 };
