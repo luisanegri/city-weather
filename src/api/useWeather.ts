@@ -34,7 +34,7 @@ const mergeWeatherDataByCity = (weatherDataArray: WeatherData[]): MergedWeatherD
 };
 
 const useWeather = () => {
-  const { data: weatherData, isLoading, isError } = useQuery({
+  const { data: weatherData, isLoading, isError, refetch } = useQuery({
     queryKey: [WEATHER_DATA_KEY],
     queryFn: fetchWeatherData,
     // Ensures that once data is fetched and cached, it remains available and "fresh" 
@@ -57,6 +57,7 @@ const useWeather = () => {
     isLoading,
     isError,
     weatherData,
+    refetch,
     getWeatherDetailsForCity,
   };
 };
