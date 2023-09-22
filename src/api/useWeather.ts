@@ -37,6 +37,10 @@ const useWeather = () => {
   const { data: weatherData, isLoading, isError } = useQuery({
     queryKey: [WEATHER_DATA_KEY],
     queryFn: fetchWeatherData,
+    // Ensures that once data is fetched and cached, it remains available and "fresh" 
+    // for the lifetime of the application, optimizing for offline access and minimizing network requests.
+    staleTime: Infinity,
+    cacheTime: Infinity,
     onSuccess: (data) => {
       console.log("Query was successful! Data:", data);
     },
