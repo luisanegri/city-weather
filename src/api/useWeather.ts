@@ -1,17 +1,18 @@
 import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
+import { AxiosError } from 'axios';
+import { customAxios } from '../http/interceptors';
 
 import { WeatherData, MergedWeatherData } from '../types/weatherTypes';
 
-const API_URL = "https://us-central1-mobile-assignment-server.cloudfunctions.net/weather";
 const WEATHER_DATA_KEY = 'weatherData';
 
 const fetchWeatherData = async () => {
   try {
-    const response = await axios.get(API_URL);
+    const response = await customAxios.get('weather');
     return mergeWeatherDataByCity(response.data);
-  } catch (error: any) {
-    console.log('Error fetching data', error)
+  } catch (error) {
+    console.log("Axios Error:", error);
+    throw error;
   }
 };
 
