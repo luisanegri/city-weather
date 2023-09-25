@@ -11,10 +11,9 @@ const persister = createAsyncStoragePersister({
   throttleTime: 3000,
 });
 
+export const queryClient = new QueryClient();
+
 export default function App() {
-
-  const queryClient = new QueryClient();
-
   return (
     <PersistQueryClientProvider
       onSuccess={() =>

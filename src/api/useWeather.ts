@@ -11,7 +11,6 @@ const fetchWeatherData = async () => {
     const response = await customAxios.get('weather');
     return mergeWeatherDataByCity(response.data);
   } catch (error) {
-    console.log("Axios Error:", error);
     throw error;
   }
 };
