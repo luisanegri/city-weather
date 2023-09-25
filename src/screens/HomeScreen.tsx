@@ -1,4 +1,4 @@
-import { FlatList, Text, View, StyleSheet } from 'react-native';
+import { FlatList, Text, View, StyleSheet, RefreshControl } from 'react-native';
 import { useCallback } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
@@ -9,7 +9,7 @@ import CityItem from '../components/CityItem';
 import { AppNavigatorParamList } from '../navigation/AppNavigator';
 
 const HomeScreen = () => {
-    const { loading, error, weatherData, getWeatherDetailsForCity } = useWeather();
+    const { isLoading, isError, errorMessage, weatherData, refetch, getWeatherDetailsForCity } = useWeather();
     const navigation = useNavigation<StackNavigationProp<AppNavigatorParamList, Routes.WeatherDetails>>();
 
     const cityNames = weatherData ? Object.keys(weatherData).sort() : [];
@@ -22,14 +22,13 @@ const HomeScreen = () => {
         });
     }, [navigation, getWeatherDetailsForCity]);
 
-    if (loading) {
+    if (isError) {
+        return <Text style={styles.errorText}>{errorMessage}</Text>;
+    }
+
+    if (isLoading) {
         return <Text style={styles.infoText}>Loading...</Text>;
     }
-
-    if (error) {
-        return <Text style={styles.errorText}>Error fetching weather data. Please try again.</Text>;
-    }
-
 
     return (
         <View style={styles.container}>
@@ -39,6 +38,12 @@ const HomeScreen = () => {
                 renderItem={({ item: cityName }) => (
                     <CityItem cityName={cityName} onPress={handleCityPress} />
                 )}
+                refreshControl={
+                    <RefreshControl
+                        refreshing={isLoading && !isError}
+                        onRefresh={refetch}
+                    />
+                }
             />
         </View>
     );
@@ -60,4 +65,3 @@ const styles = StyleSheet.create({
 });
 
 export default HomeScreen;
-
