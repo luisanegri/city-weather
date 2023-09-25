@@ -9,7 +9,7 @@ import CityItem from '../components/CityItem';
 import { AppNavigatorParamList } from '../navigation/AppNavigator';
 
 const HomeScreen = () => {
-    const { isLoading, isError, weatherData, refetch, getWeatherDetailsForCity } = useWeather();
+    const { isLoading, isError, errorMessage, weatherData, refetch, getWeatherDetailsForCity } = useWeather();
     const navigation = useNavigation<StackNavigationProp<AppNavigatorParamList, Routes.WeatherDetails>>();
 
     const cityNames = weatherData ? Object.keys(weatherData).sort() : [];
@@ -23,7 +23,7 @@ const HomeScreen = () => {
     }, [navigation, getWeatherDetailsForCity]);
 
     if (isError) {
-        return <Text style={styles.errorText}>Error fetching weather data. Please try again.</Text>;
+        return <Text style={styles.errorText}>{errorMessage}</Text>;
     }
 
     if (isLoading) {

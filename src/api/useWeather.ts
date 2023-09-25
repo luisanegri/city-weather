@@ -35,7 +35,7 @@ const mergeWeatherDataByCity = (weatherDataArray: WeatherData[]): MergedWeatherD
 };
 
 const useWeather = () => {
-  const { data: weatherData, isLoading, isError, refetch } = useQuery({
+  const { data: weatherData, isLoading, isError, error, refetch } = useQuery({
     queryKey: [WEATHER_DATA_KEY],
     queryFn: fetchWeatherData,
     // Ensures that once data is fetched and cached, it remains available and "fresh" 
@@ -45,10 +45,9 @@ const useWeather = () => {
     onSuccess: (data) => {
       console.log("Query was successful! Data:", data);
     },
-    onError: (error) => {
-      console.log("Error during fetching:", error);
-    },
   });
+
+  const errorMessage = isError && error ? (error as AxiosError).message : null;
 
   const getWeatherDetailsForCity = (cityName: string): WeatherData | null => {
     return weatherData ? weatherData[cityName] : null;
@@ -57,6 +56,7 @@ const useWeather = () => {
   return {
     isLoading,
     isError,
+    errorMessage,
     weatherData,
     refetch,
     getWeatherDetailsForCity,
