@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 import { customAxios } from '../http/interceptors';
 
-import { WeatherData, MergedWeatherData } from '../types/weatherTypes';
+import { WeatherData, MergedWeatherData, CityWeatherData } from '../types/weatherTypes';
 
 const WEATHER_DATA_KEY = 'weatherData';
 
@@ -49,7 +49,7 @@ const useWeather = () => {
 
   const errorMessage = isError && error ? (error as AxiosError).message : null;
 
-  const getWeatherDetailsForCity = (cityName: string): WeatherData | null => {
+  const getWeatherDetailsForCity = (cityName: string): CityWeatherData | null => {
     return weatherData ? weatherData[cityName] : null;
   };
 
