@@ -1,6 +1,8 @@
 import axios, { AxiosError, AxiosInstance } from 'axios';
-import { queryClient } from '../../App';
+
+import { queryClient } from '../queryClientSetup';
 import { MergedWeatherData } from '../types/weatherTypes';
+import { WEATHER_DATA_KEY } from '../utils/constants';
 
 export const customAxios: AxiosInstance = axios.create({
     baseURL: "https://us-central1-mobile-assignment-server.cloudfunctions.net/",
@@ -27,7 +29,7 @@ customAxios.interceptors.response.use(
         } else if (error.request) {
             console.log("Interceptor: Error Request Detected:", error.request);
 
-            const cachedData = queryClient.getQueryData<MergedWeatherData>(['weatherData']);
+            const cachedData = queryClient.getQueryData<MergedWeatherData>([WEATHER_DATA_KEY]);
             console.log("Interceptor: Attempting to Fetch Cached Data:", cachedData);
 
             if (cachedData) {

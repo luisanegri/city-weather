@@ -5,20 +5,22 @@ type CityImageWithLabelProps = {
     imageUrl: string
 }
 
-const CityImageWithLabel: React.FC<CityImageWithLabelProps> = ({ cityName, imageUrl }) => (
-    <View style={styles.container}>
-        <ImageBackground
-            source={{ uri: imageUrl }}
-            style={styles.imageBackground}
-            resizeMode="stretch"
-        >
-            <View style={styles.overlay}>
-                <Text style={styles.cityName}>{cityName}</Text>
-            </View>
+const CityImageWithLabel: React.FC<CityImageWithLabelProps> = ({ cityName, imageUrl }) => {
+    return (
+        <View style={styles.container}>
+            <ImageBackground
+                source={{ uri: imageUrl }}
+                style={styles.imageBackground}
+                resizeMode="stretch"
+            >
+                <View style={styles.overlay}>
+                    <Text style={styles.cityName}>{cityName}</Text>
+                </View>
 
-        </ImageBackground>
-    </View>
-);
+            </ImageBackground>
+        </View>
+    )
+};
 
 const styles = StyleSheet.create({
     container: {

@@ -1,24 +1,21 @@
 import React from 'react';
 import { View, Text, FlatList, StyleSheet } from 'react-native';
-import { format } from 'date-fns';
-import { Weather } from '../types/weatherTypes';
 
-type CityTemperaturesProps = {
+import { Weather } from '../types/weatherTypes';
+import { formatDate } from '../utils/formatDate';
+
+type CityWeatherListProps = {
     weatherData: Weather[]
 }
 
-const CityWeatherList: React.FC<CityTemperaturesProps> = ({ weatherData }) => {
+const CityWeatherList: React.FC<CityWeatherListProps> = ({ weatherData }) => {
 
-    const renderItem = ({ item }: { item: Weather }) => {
-        const formattedDate = format(new Date(item.date), 'MMMM d, yyyy, h:mm a');
-
-        return (
-            <View style={styles.row}>
-                <Text style={styles.dateColumn}>{formattedDate}</Text>
-                <Text style={styles.tempColumn}>{item.temp}°C</Text>
-            </View>
-        );
-    };
+    const renderItem = ({ item }: { item: Weather }) => (
+        <View style={styles.row}>
+            <Text style={styles.dateColumn}>{formatDate(item.date)}</Text>
+            <Text style={styles.tempColumn}>{item.temp}°C</Text>
+        </View>
+    );
 
     return (
         <>

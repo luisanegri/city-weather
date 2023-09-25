@@ -2,9 +2,9 @@ import { useQuery } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 import { customAxios } from '../http/interceptors';
 
-import { WeatherData, MergedWeatherData, CityWeatherData } from '../types/weatherTypes';
-
-const WEATHER_DATA_KEY = 'weatherData';
+import { CityWeatherData } from '../types/weatherTypes';
+import { WEATHER_DATA_KEY } from '../utils/constants';
+import { mergeWeatherDataByCity } from '../utils/weatherData';
 
 const fetchWeatherData = async () => {
   try {
@@ -13,24 +13,6 @@ const fetchWeatherData = async () => {
   } catch (error) {
     throw error;
   }
-};
-
-const mergeWeatherDataByCity = (weatherDataArray: WeatherData[]): MergedWeatherData => {
-  return weatherDataArray.reduce((accumulator: MergedWeatherData, currentData: WeatherData) => {
-    const cityName = currentData.city.name;
-    if (!accumulator[cityName]) {
-      accumulator[cityName] = {
-        city: currentData.city,
-        weather: [],
-      };
-    }
-    accumulator[cityName].weather.push({
-      date: currentData.date,
-      temp: currentData.temp,
-      tempType: currentData.tempType,
-    });
-    return accumulator;
-  }, {});
 };
 
 const useWeather = () => {
