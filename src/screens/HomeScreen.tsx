@@ -17,9 +17,14 @@ const HomeScreen = () => {
     const handleCityPress = useCallback((cityName: string) => {
         const data = getWeatherDetailsForCity(cityName);
 
-        navigation.navigate(Routes.WeatherDetails, {
-            weatherDataForCity: data
-        });
+        if (data) {
+            navigation.navigate(Routes.WeatherDetails, {
+                weatherDataForCity: data
+            });
+        } else {
+            console.log('No data found')
+        }
+
     }, [navigation, getWeatherDetailsForCity]);
 
     if (isError) {
