@@ -1,5 +1,5 @@
 import { FlatList, Text, View, StyleSheet, RefreshControl } from 'react-native';
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 
@@ -12,7 +12,9 @@ const HomeScreen = () => {
     const { isLoading, isError, errorMessage, weatherData, refetch, getWeatherDetailsForCity } = useWeather();
     const navigation = useNavigation<StackNavigationProp<AppNavigatorParamList, Routes.WeatherDetails>>();
 
-    const cityNames = weatherData ? Object.keys(weatherData).sort() : [];
+    const cityNames = useMemo(() => {
+        return weatherData ? Object.keys(weatherData).sort() : [];
+    }, [weatherData]);
 
     const handleCityPress = useCallback((cityName: string) => {
         const data = getWeatherDetailsForCity(cityName);
