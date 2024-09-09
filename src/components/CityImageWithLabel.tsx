@@ -2,9 +2,11 @@ import {
   Dimensions,
   View,
   Text,
-  ImageBackground,
+  Image,
   StyleSheet,
+  ActivityIndicator,
 } from "react-native";
+import { useState } from "react";
 
 type CityImageWithLabelProps = {
   cityName: string;
@@ -15,17 +17,25 @@ const CityImageWithLabel: React.FC<CityImageWithLabelProps> = ({
   cityName,
   imageUrl,
 }) => {
+  const [loading, setLoading] = useState(true);
+
   return (
     <View style={styles.container}>
-      <ImageBackground
+      {loading && (
+        <ActivityIndicator size="large" color="#0000ff" style={styles.loader} />
+      )}
+      <Image
         source={{ uri: imageUrl }}
         style={styles.imageBackground}
-        resizeMode="stretch"
-      >
+        resizeMode="cover"
+        onLoadEnd={() => setLoading(false)}
+        onError={() => setLoading(false)}
+      />
+      {!loading && (
         <View style={styles.overlay}>
           <Text style={styles.cityName}>{cityName}</Text>
         </View>
-      </ImageBackground>
+      )}
     </View>
   );
 };
@@ -36,11 +46,17 @@ const styles = StyleSheet.create({
     width: "100%",
     alignItems: "center",
     justifyContent: "center",
+    position: "relative",
+  },
+  loader: {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: [{ translateX: -15 }, { translateY: -15 }],
+    zIndex: 1,
   },
   imageBackground: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
     width: "100%",
   },
   overlay: {
@@ -49,6 +65,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingHorizontal: 40,
     paddingVertical: 30,
+    position: "absolute",
+    width: "100%",
+    height: "100%",
   },
   cityName: {
     color: "white",
