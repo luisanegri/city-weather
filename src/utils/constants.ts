@@ -1,1 +1,1 @@
-export const WEATHER_DATA_KEY = 'weatherData';
+export const WEATHER_DATA_KEY = "weatherData";
