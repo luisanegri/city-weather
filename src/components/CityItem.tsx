@@ -6,7 +6,7 @@ type CityItemProps = {
   onPress: (cityName: string) => void;
 };
 
-const CityItem: React.FC<CityItemProps> = ({ cityName, onPress }) => (
+const CityItem = ({ cityName, onPress }: CityItemProps) => (
   <TouchableOpacity onPress={() => onPress(cityName)}>
     <Text style={styles.cityName}>{cityName}</Text>
   </TouchableOpacity>

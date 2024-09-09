@@ -8,7 +8,7 @@ type CityWeatherListProps = {
   weatherData: Weather[];
 };
 
-const CityWeatherList: React.FC<CityWeatherListProps> = ({ weatherData }) => {
+const CityWeatherList = ({ weatherData }: CityWeatherListProps) => {
   const renderItem = ({ item }: { item: Weather }) => (
     <View style={styles.row}>
       <Text style={styles.dateColumn}>{formatDate(item.date)}</Text>

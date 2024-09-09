@@ -13,10 +13,10 @@ type CityImageWithLabelProps = {
   imageUrl: string;
 };
 
-const CityImageWithLabel: React.FC<CityImageWithLabelProps> = ({
+const CityImageWithLabel = ({
   cityName,
   imageUrl,
-}) => {
+}: CityImageWithLabelProps) => {
   const [loading, setLoading] = useState(true);
 
   return (
