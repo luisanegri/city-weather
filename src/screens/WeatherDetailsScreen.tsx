@@ -4,7 +4,19 @@ import CityImageWithLabel from "../components/CityImageWithLabel";
 import { CityWeatherData } from "../types/weatherTypes";
 import { convertToCelsius } from "../utils/weatherData";
 
-const WeatherDetailsScreen = ({ route, navigation }) => {
+import { RouteProp } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { RootStackParamList } from "../types/navigationTypes";
+
+type WeatherDetailsScreenProps = {
+  route: RouteProp<RootStackParamList, "WeatherDetails">;
+  navigation: StackNavigationProp<RootStackParamList, "WeatherDetails">;
+};
+
+const WeatherDetailsScreen = ({
+  route,
+  navigation,
+}: WeatherDetailsScreenProps) => {
   const weatherDataForCity: CityWeatherData = route.params.weatherDataForCity;
 
   useLayoutEffect(() => {
