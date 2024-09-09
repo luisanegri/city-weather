@@ -3,7 +3,7 @@ import { useCallback, useMemo } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { Routes } from "../navigation/routes";
-import useWeather from "../api/useWeather";
+import useWeather from "../hooks/useWeather";
 import CityItem from "../components/CityItem";
 import { AppNavigatorParamList } from "../navigation/AppNavigator";
 
