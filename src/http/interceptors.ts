@@ -19,9 +19,29 @@ const handleErrorResponse = (error: AxiosError): string => {
     return "We're experiencing server issues. Please try again later.";
   }
 
+  if (status === 503) {
+    return "The service is temporarily unavailable. Please try again later.";
+  }
+
+  if (status === 400) {
+    return "There was a problem with the request. Please try again.";
+  }
+
   if (status === 401 || status === 403) {
     queryClient.removeQueries([WEATHER_DATA_KEY]);
     return "You are not authorized to access this data.";
+  }
+
+  if (status === 408) {
+    return "The request took too long. Please try again later.";
+  }
+
+  if (status === 404) {
+    return "The requested data was not found. Please check back later.";
+  }
+
+  if (status === 429) {
+    return "Too many requests. Please slow down and try again later.";
   }
 
   return "An error occurred while fetching data.";
