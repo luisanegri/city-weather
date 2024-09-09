@@ -1,5 +1,5 @@
 import { createStackNavigator } from "@react-navigation/stack";
-import HomeScreen from "../screens/HomeScreen";
+import CityListScreen from "../screens/CityListScreen";
 import WeatherDetailsScreen from "../screens/WeatherDetailsScreen";
 import { Routes } from "./routes";
 import { CityWeatherData } from "../types/weatherTypes";
@@ -18,7 +18,7 @@ const AppNavigator: React.FC = () => {
     <Stack.Navigator initialRouteName={Routes.Home}>
       <Stack.Screen
         name={Routes.Home}
-        component={HomeScreen}
+        component={CityListScreen}
         options={{ title: "Weather by City" }}
       />
       <Stack.Screen

@@ -2,13 +2,12 @@ import { FlatList, Text, View, StyleSheet, RefreshControl } from "react-native";
 import { useCallback, useMemo } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
-
 import { Routes } from "../navigation/routes";
 import useWeather from "../api/useWeather";
 import CityItem from "../components/CityItem";
 import { AppNavigatorParamList } from "../navigation/AppNavigator";
 
-const HomeScreen = () => {
+const CityListScreen = () => {
   const {
     isLoading,
     isError,
@@ -83,4 +82,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default HomeScreen;
+export default CityListScreen;
