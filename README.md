@@ -168,7 +168,7 @@ Before you begin, ensure you have the following installed on your machine:
 
 - **Install Dependencies**
 ```
-  npx expo install
+  npm install
 ```
 
 - **Start the Expo Development Server**
